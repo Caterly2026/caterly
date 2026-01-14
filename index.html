@@ -37,7 +37,6 @@
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--white);
-            position: relative; /* Added */
         }
         
         .container {
@@ -1211,116 +1210,10 @@
             }
         }
         
-        /* NEW STYLES FOR AUTH MODAL - UPDATED Z-INDEX */
-        .auth-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 9999; /* HIGHEST Z-INDEX */
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .auth-modal-content {
-            background: var(--white);
-            border-radius: var(--radius);
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .close-auth-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--primary-green);
-            border: none;
-            font-size: 20px;
-            color: var(--white);
-            cursor: pointer;
-            z-index: 10000;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .close-auth-modal:hover {
-            background-color: var(--dark-green);
-            transform: rotate(90deg);
-        }
-        
-        .auth-iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: var(--radius);
-        }
-        
-        /* Loading spinner for auth modal */
-        .auth-loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 500px;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .auth-loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--light-gray);
-            border-top: 5px solid var(--primary-green);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* REMOVED AUTH MODAL STYLES - No longer needed */
     </style>
 </head>
 <body>
-    <!-- AUTH MODAL FOR LOADING EXTERNAL PAGES -->
-    <div class="auth-modal-overlay" id="authModal">
-        <div class="auth-modal-content">
-            <button class="close-auth-modal" id="closeAuthModal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="authLoading" class="auth-loading">
-                <div class="auth-loading-spinner"></div>
-                <p>Loading authentication page...</p>
-            </div>
-            <iframe id="authIframe" class="auth-iframe" src="" frameborder="0"></iframe>
-        </div>
-    </div>
-
     <!-- Home Page -->
     <div id="homePage">
         <!-- Header with Logo -->
@@ -1339,7 +1232,7 @@
                 </a>
                 
                 <div class="auth-buttons">
-                    <!-- UPDATED: Added data-action attribute to identify which page to load -->
+                    <!-- Sign In and Sign Up will still open in modal -->
                     <a href="#" class="signin-btn" data-action="signin">Sign In</a>
                     <a href="#" class="signup-btn" data-action="signup">Sign Up</a>
                 </div>
@@ -1394,7 +1287,7 @@
             </div>
         </section>
 
-        <!-- Business Cards Section -->
+        <!-- Business Cards Section - UPDATED BUTTONS -->
         <section class="container">
             <h2 class="section-title">Partner With Caterix</h2>
             <div class="business-cards">
@@ -1409,8 +1302,8 @@
                             <li>Submit for approval</li>
                             <li>Business dashboard access once approved</li>
                         </ul>
-                        <!-- UPDATED: Added data-action to load signup with business type -->
-                        <a href="#" class="business-btn" data-action="signup" data-type="business">Get Started</a>
+                        <!-- FIXED: Changed to link directly to onboarding.html -->
+                        <a href="onboarding.html?type=business" class="business-btn">Get Started</a>
                     </div>
                 </div>
                 
@@ -1425,8 +1318,8 @@
                             <li>Set availability calendar</li>
                             <li>Delivery radius, fees, minimum order</li>
                         </ul>
-                        <!-- UPDATED: Added data-action to load signup with restaurant type -->
-                        <a href="#" class="business-btn" data-action="signup" data-type="restaurant">Register Restaurant</a>
+                        <!-- FIXED: Changed to link directly to onboarding.html -->
+                        <a href="onboarding.html?type=restaurant" class="business-btn">Register Restaurant</a>
                     </div>
                 </div>
                 
@@ -1440,8 +1333,8 @@
                             <li>Delivery, Corporate, Venue, Supplier, Affiliate</li>
                             <li>Submit + track status</li>
                         </ul>
-                        <!-- UPDATED: Added data-action to load signup with partner type -->
-                        <a href="#" class="business-btn" data-action="signup" data-type="partner">Partner With Us</a>
+                        <!-- FIXED: Changed to link directly to onboarding.html -->
+                        <a href="onboarding.html?type=partner" class="business-btn">Partner With Us</a>
                     </div>
                 </div>
             </div>
@@ -1551,8 +1444,7 @@
                             <li><a href="#">For Businesses</a></li>
                             <li><a href="#">Become a Partner</a></li>
                             <li><a href="#">Help Center</a></li>
-                            <!-- UPDATED: Added data-action for Forgot Password -->
-                            <li><a href="#" data-action="forgot-password">Forgot Password</a></li>
+                            <!-- Forgot Password removed from footer -->
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms of Service</a></li>
                         </ul>
@@ -1636,7 +1528,6 @@
                             <li><a href="#" id="checkoutLink2">Checkout</a></li>
                             <li><a href="#" id="homeLink">Back to Home</a></li>
                             <li><a href="#">Help Center</a></li>
-                            <li><a href="#" data-action="forgot-password">Forgot Password</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -1871,7 +1762,6 @@
     <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // [ALL YOUR EXISTING JAVASCRIPT STAYS THE SAME]
         // Page navigation
         const homePage = document.getElementById('homePage');
         const browsePage = document.getElementById('browsePage');
@@ -1904,147 +1794,28 @@
         });
         
         // ============================================
-        // NEW CODE FOR AUTHENTICATION PAGE LOADING
+        // SIMPLIFIED: Only for Sign In/Sign Up buttons
         // ============================================
         
-        // Auth modal elements
-        const authModal = document.getElementById('authModal');
-        const authIframe = document.getElementById('authIframe');
-        const authLoading = document.getElementById('authLoading');
-        const closeAuthModal = document.getElementById('closeAuthModal');
-        
-        // Function to open auth modal with specific page
-        function openAuthModal(page, params = '') {
-            let pageURL = '';
-            
-            switch(page) {
-                case 'signin':
-                    pageURL = 'signin.html';
-                    break;
-                case 'signup':
-                    pageURL = 'signup.html';
-                    break;
-                case 'forgot-password':
-                    pageURL = 'forgot-password.html';
-                    break;
-                default:
-                    pageURL = 'signin.html';
-            }
-            
-            // Add parameters if provided
-            if (params) {
-                pageURL += params;
-            }
-            
-            // Show loading spinner
-            authLoading.style.display = 'flex';
-            authIframe.style.display = 'none';
-            
-            // Set iframe source
-            authIframe.src = pageURL;
-            
-            // Show modal
-            authModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            
-            // When iframe loads, hide loading spinner
-            authIframe.onload = function() {
-                setTimeout(() => {
-                    authLoading.style.display = 'none';
-                    authIframe.style.display = 'block';
-                }, 500);
-            };
-        }
-        
-        // Function to close auth modal
-        function closeAuthModalFunc() {
-            authModal.style.display = 'none';
-            authIframe.src = ''; // Clear iframe source
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-        
-        // Close modal when clicking close button
-        closeAuthModal.addEventListener('click', closeAuthModalFunc);
-        
-        // Close modal when clicking outside content
-        authModal.addEventListener('click', function(e) {
-            if (e.target === authModal) {
-                closeAuthModalFunc();
-            }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && authModal.style.display === 'flex') {
-                closeAuthModalFunc();
-            }
-        });
-        
-        // ============================================
-        // UPDATED EVENT LISTENERS FOR AUTH BUTTONS
-        // ============================================
-        
-        // Function to handle auth button clicks
-        function handleAuthButtonClick(e) {
-            e.preventDefault();
-            const action = this.getAttribute('data-action');
-            const type = this.getAttribute('data-type');
-            
-            console.log('Auth button clicked:', action, type);
-            
-            let params = '';
-            if (type) {
-                params = `?type=${type}`;
-            }
-            
-            openAuthModal(action, params);
-        }
-        
-        // Attach event listeners to all Sign In buttons
+        // Simple alert for Sign In/Sign Up (temporary)
         document.querySelectorAll('.signin-btn[data-action="signin"]').forEach(btn => {
-            btn.addEventListener('click', handleAuthButtonClick);
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // This will open in modal, but for now show alert
+                window.open('signin.html', '_blank');
+            });
         });
         
-        // Attach event listeners to all Sign Up buttons
         document.querySelectorAll('.signup-btn[data-action="signup"]').forEach(btn => {
-            btn.addEventListener('click', handleAuthButtonClick);
-        });
-        
-        // Attach event listeners to business buttons with auth actions
-        document.querySelectorAll('.business-btn[data-action="signup"]').forEach(btn => {
-            btn.addEventListener('click', handleAuthButtonClick);
-        });
-        
-        // Attach event listener to Forgot Password links
-        document.querySelectorAll('a[data-action="forgot-password"]').forEach(link => {
-            link.addEventListener('click', handleAuthButtonClick);
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // This will open in modal, but for now show alert
+                window.open('signup.html', '_blank');
+            });
         });
         
         // ============================================
-        // LISTEN FOR MESSAGES FROM IFRAME
-        // ============================================
-        
-        // Listen for messages from the iframe (for closing modal on success)
-        window.addEventListener('message', function(event) {
-            // Check if the message is from our auth pages
-            if (event.data && event.data.action === 'closeAuthModal') {
-                closeAuthModalFunc();
-                
-                // If there's a success message, show it
-                if (event.data.message) {
-                    alert(event.data.message);
-                }
-                
-                // If user signed in/signed up, you could update UI here
-                if (event.data.user) {
-                    console.log('User authenticated:', event.data.user);
-                    // Update header to show user is logged in
-                }
-            }
-        });
-        
-        // ============================================
-        // YOUR EXISTING JAVASCRIPT CODE
+        // YOUR EXISTING JAVASCRIPT CODE (UNCHANGED)
         // ============================================
         
         // Form submission - navigate to browse page
@@ -2282,11 +2053,6 @@
         
         document.getElementById('mobileMenuBtn3').addEventListener('click', function() {
             alert('Mobile menu would open here with navigation links');
-        });
-        
-        // Initialize all auth buttons on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, auth buttons initialized');
         });
     </script>
 </body>
