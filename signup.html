@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Food Delivery</title>
+    <title>Sign Up - Caterix</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
@@ -41,19 +41,22 @@
             align-items: center;
             gap: 8px;
             font-size: 16px;
+            transition: all 0.3s;
         }
         
         .back-home a:hover {
             text-decoration: underline;
+            transform: translateX(-5px);
         }
         
         .signup-box {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             padding: 40px;
             width: 100%;
             max-width: 450px;
+            border: 1px solid rgba(46, 125, 50, 0.1);
         }
         
         .logo {
@@ -62,9 +65,10 @@
         }
         
         .logo h1 {
-            color: #333;
+            color: #2e7d32;
             font-size: 32px;
             margin-bottom: 5px;
+            font-weight: 700;
         }
         
         .logo p {
@@ -90,9 +94,14 @@
             color: #555;
         }
         
+        .user-type-btn:hover {
+            border-color: #2e7d32;
+            background: rgba(46, 125, 50, 0.05);
+        }
+        
         .user-type-btn.active {
-            border-color: 2e7d32;
-            background: 2e7d32;
+            border-color: #2e7d32;
+            background: #2e7d32;
             color: white;
         }
         
@@ -113,30 +122,35 @@
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background-color: #f8f9f8;
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: 2e7d32;
+            border-color: #2e7d32;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
         }
         
         .signup-btn {
             width: 100%;
             padding: 15px;
-            background: 2e7d32;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
             color: white;
             border: none;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
             margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
         }
         
         .signup-btn:hover {
-            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
         }
         
         .divider {
@@ -182,8 +196,9 @@
         }
         
         .google-btn:hover {
-            border-color: #667eea;
-            background: #f8f9fa;
+            border-color: #2e7d32;
+            background: #f8f9f8;
+            transform: translateY(-2px);
         }
         
         .login-link {
@@ -193,13 +208,15 @@
         }
         
         .login-link a {
-            color: #667eea;
+            color: #2e7d32;
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s;
         }
         
         .login-link a:hover {
             text-decoration: underline;
+            color: #1b5e20;
         }
         
         @media (max-width: 480px) {
@@ -209,6 +226,10 @@
             
             .logo h1 {
                 font-size: 28px;
+            }
+            
+            .user-type-selector {
+                flex-direction: column;
             }
         }
     </style>
@@ -224,7 +245,7 @@
         <div class="signup-box">
             <div class="logo">
                 <h1>Create Account</h1>
-                <p>Join our food delivery community</p>
+                <p>Join our catering community</p>
             </div>
             
             <div class="user-type-selector">
@@ -289,9 +310,6 @@
         });
         
         function updateFormForUserType(type) {
-            const form = document.getElementById('signupForm');
-            
-            // You can customize form based on user type
             if (type === 'restaurant') {
                 document.querySelector('.logo h1').textContent = 'Register Restaurant';
                 document.querySelector('.logo p').textContent = 'Join as a restaurant partner';
@@ -300,7 +318,7 @@
                 document.querySelector('.logo p').textContent = 'Join as a delivery partner';
             } else {
                 document.querySelector('.logo h1').textContent = 'Create Account';
-                document.querySelector('.logo p').textContent = 'Join our food delivery community';
+                document.querySelector('.logo p').textContent = 'Join our catering community';
             }
         }
         
