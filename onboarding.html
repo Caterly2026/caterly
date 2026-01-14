@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caterix - Restaurant Onboarding Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            color: #1e293b;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
+        }
+        
+        .brand-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .caterix-logo {
+            font-weight: 800;
+            font-size: 36px;
+            letter-spacing: -0.5px;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 25%;
+            background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #10b981;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #475569;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #ef4444;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            color: #1e293b;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .file-upload {
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #f8fafc;
+        }
+        
+        .file-upload:hover {
+            border-color: #10b981;
+            background-color: #f0f9ff;
+        }
+        
+        .file-upload.dragover {
+            border-color: #10b981;
+            background-color: #f0fdf4;
+        }
+        
+        .upload-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+            color: #64748b;
+        }
+        
+        .upload-text {
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .upload-hint {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group {
+            margin-top: 10px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-weight: normal;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        
+        .hours-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .day-hours {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .day-hours h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+        
+        .time-inputs {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .time-inputs span {
+            margin: 0 10px;
+            color: #64748b;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+        }
+        
+        .footer-note {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 30px;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .note-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .step-btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+            background-color: white;
+            color: #475569;
+            transition: all 0.3s;
+        }
+        
+        .step-btn:hover {
+            border-color: #10b981;
+            color: #10b981;
+        }
+        
+        .step-btn.primary {
+            background-color: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .step-btn.primary:hover {
+            background-color: #059669;
+        }
+        
+        .document-list {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .document-list h4 {
+            margin-top: 0;
+            color: #1e293b;
+        }
+        
+        .document-list ul {
+            padding-left: 20px;
+            color: #475569;
+        }
+        
+        .document-list li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 25px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .caterix-logo {
+                font-size: 32px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .step-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .step-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand-container">
+                <div class="caterix-logo">CATERIX</div>
+            </div>
+            <div class="tagline">Restaurant Partner Onboarding</div>
+        </div>
+        
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="note-box">
+                <strong>Welcome to Caterix!</strong> We're excited to partner with you. Please complete this form to join our restaurant network. You'll need your business license, food service permit, and menu ready.
+            </div>
+            
+            <form id="caterixForm">
+                <!-- Step 1: Restaurant Information -->
+                <div class="form-step active" id="step1">
+                    <div class="section">
+                        <h2 class="section-title">Restaurant Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="restaurantName" class="required">Restaurant Name</label>
+                                <input type="text" id="restaurantName" name="restaurantName" required placeholder="Your restaurant name">
+                            </div>
+                            <div class="form-group">
+                                <label for="cuisineType" class="required">Primary Cuisine Type</label>
+                                <select id="cuisineType" name="cuisineType" required>
+                                    <option value="">Select cuisine type</option>
+                                    <option value="american">American</option>
+                                    <option value="italian">Italian</option>
+                                    <option value="mexican">Mexican</option>
+                                    <option value="chinese">Chinese</option>
+                                    <option value="indian">Indian</option>
+                                    <option value="japanese">Japanese</option>
+                                    <option value="mediterranean">Mediterranean</option>
+                                    <option value="thai">Thai</option>
+                                    <option value="vietnamese">Vietnamese</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address" class="required">Business Address</label>
+                                <input type="text" id="address" name="address" required placeholder="Full street address">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="required">Business Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(123) 456-7890">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="required">Business Email</label>
+                                <input type="email" id="email" name="email" required placeholder="contact@yourrestaurant.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website (Optional)</label>
+                                <input type="url" id="website" name="website" placeholder="https://www.yourrestaurant.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ownerName" class="required">Primary Contact Name</label>
+                                <input type="text" id="ownerName" name="ownerName" required placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="ownerTitle" class="required">Contact Title</label>
+                                <select id="ownerTitle" name="ownerTitle" required>
+                                    <option value="">Select title</option>
+                                    <option value="owner">Owner</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="director">Director</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <div></div>
+                        <button type="button" class="step-btn primary" onclick="nextStep()">Next: Business Documents →</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Business Documentation -->
+                <div class="form-step" id="step2">
+                    <div class="section">
+                        <h2 class="section-title">Business Documentation</h2>
+                        
+                        <div class="document-list">
+                            <h4>Required Documents:</h4>
+                            <ul>
+                                <li>Business License/Registration Certificate</li>
+                                <li>Food Service Permit/Health Certificate</li>
+                                <li>Tax ID/EIN Documentation</li>
+                                <li>Certificate of Insurance (if applicable)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="businessLicense" class="required">Business License Number</label>
+                                <input type="text" id="businessLicense" name="businessLicense" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="taxId" class="required">Tax ID/EIN Number</label>
+                                <input type="text" id="taxId" name="taxId" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Upload Business License</label>
+                            <div class="file-upload" id="licenseUpload">
+                                <div class="upload-icon">📄</div>
+                                <div class="upload-text">Click to upload Business License</div>
+                                <div class="upload-hint">PDF, JPG or PNG up to 10MB</div>
+                            </div>
+                            <input type="file" id="licenseFile" name="licenseFile" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Upload Food Service Permit</label>
+                            <div class="file-upload" id="permitUpload">
+                                <div class="upload-icon">📋</div>
+                                <div class="upload-text">Click to upload Food Service Permit</div>
+                                <div class="upload-hint">PDF, JPG or PNG up to 10MB</div>
+                            </div>
+                            <input type="file" id="permitFile" name="permitFile" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Certificate of Insurance (Optional)</label>
+                            <div class="file-upload" id="insuranceUpload">
+                                <div class="upload-icon">🛡️</div>
+                                <div class="upload-text">Click to upload Insurance Certificate</div>
+                                <div class="upload-hint">PDF, JPG or PNG up to 10MB</div>
+                            </div>
+                            <input type="file" id="insuranceFile" name="insuranceFile" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="step-btn" onclick="prevStep()">← Previous</button>
+                        <button type="button" class="step-btn primary" onclick="nextStep()">Next: Operations →</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Operations -->
+                <div class="form-step" id="step3">
+                    <div class="section">
+                        <h2 class="section-title">Restaurant Operations</h2>
+                        
+                        <div class="form-group">
+                            <label for="seatingCapacity">Indoor Seating Capacity (Optional)</label>
+                            <input type="number" id="seatingCapacity" name="seatingCapacity" min="0" placeholder="e.g., 50">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="yearsInOperation" class="required">Years in Operation</label>
+                            <select id="yearsInOperation" name="yearsInOperation" required>
+                                <option value="">Select</option>
+                                <option value="less1">Less than 1 year</option>
+                                <option value="1-3">1-3 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="5-10">5-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+                        
+                        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #1e293b;">Delivery Hours</h3>
+                        <p style="margin-bottom: 20px; color: #64748b;">Specify when you want to accept delivery orders through Caterix:</p>
+                        
+                        <div class="hours-container">
+                            <!-- Monday -->
+                            <div class="day-hours">
+                                <h4>Monday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="mondayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="mondayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="mondayClose" value="21:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Tuesday -->
+                            <div class="day-hours">
+                                <h4>Tuesday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="tuesdayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="tuesdayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="tuesdayClose" value="21:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Wednesday -->
+                            <div class="day-hours">
+                                <h4>Wednesday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="wednesdayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="wednesdayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="wednesdayClose" value="21:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Thursday -->
+                            <div class="day-hours">
+                                <h4>Thursday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="thursdayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="thursdayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="thursdayClose" value="21:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Friday -->
+                            <div class="day-hours">
+                                <h4>Friday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="fridayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="fridayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="fridayClose" value="22:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Saturday -->
+                            <div class="day-hours">
+                                <h4>Saturday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="saturdayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="saturdayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="saturdayClose" value="22:00">
+                                </div>
+                            </div>
+                            
+                            <!-- Sunday -->
+                            <div class="day-hours">
+                                <h4>Sunday</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="sundayClosed"> Closed all day
+                                    </label>
+                                </div>
+                                <div class="time-inputs">
+                                    <input type="time" name="sundayOpen" value="11:00">
+                                    <span>to</span>
+                                    <input type="time" name="sundayClose" value="21:00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="step-btn" onclick="prevStep()">← Previous</button>
+                        <button type="button" class="step-btn primary" onclick="nextStep()">Next: Menu & Banking →</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Menu & Banking -->
+                <div class="form-step" id="step4">
+                    <div class="section">
+                        <h2 class="section-title">Menu & Financial Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="menuDescription" class="required">Menu Description</label>
+                            <textarea id="menuDescription" name="menuDescription" rows="3" required placeholder="Describe your menu offerings, specialties, and popular dishes"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="priceRange" class="required">Price Range</label>
+                            <select id="priceRange" name="priceRange" required>
+                                <option value="">Select price range</option>
+                                <option value="$">$ (Budget-friendly)</option>
+                                <option value="$$">$$ (Moderate)</option>
+                                <option value="$$$">$$$ (Upscale)</option>
+                                <option value="$$$$">$$$$ (Fine dining)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Upload Current Menu</label>
+                            <div class="file-upload" id="menuUpload">
+                                <div class="upload-icon">📃</div>
+                                <div class="upload-text">Click to upload your menu</div>
+                                <div class="upload-hint">Include all items with prices (PDF, JPG, or PNG)</div>
+                            </div>
+                            <input type="file" id="menuFile" name="menuFile" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Upload Restaurant Photos</label>
+                            <div class="file-upload" id="photosUpload">
+                                <div class="upload-icon">📸</div>
+                                <div class="upload-text">Click to upload restaurant/food photos</div>
+                                <div class="upload-hint">High-quality images of your restaurant and dishes</div>
+                            </div>
+                            <input type="file" id="photosFile" name="photosFile" accept=".jpg,.jpeg,.png" multiple style="display: none;">
+                        </div>
+                        
+                        <h3 style="margin-top: 40px; margin-bottom: 20px; color: #1e293b;">Bank Account Information</h3>
+                        <p style="margin-bottom: 20px; color: #64748b;">This is where your Caterix earnings will be deposited.</p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="accountHolder" class="required">Account Holder Name</label>
+                                <input type="text" id="accountHolder" name="accountHolder" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bankName" class="required">Bank Name</label>
+                                <input type="text" id="bankName" name="bankName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="accountNumber" class="required">Account Number</label>
+                                <input type="text" id="accountNumber" name="accountNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="routingNumber" class="required">Routing Number</label>
+                                <input type="text" id="routingNumber" name="routingNumber" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group" style="margin-top: 30px;">
+                            <label>
+                                <input type="checkbox" name="menuChanges" required>
+                                I understand that I will work with a Caterix representative to optimize my menu for the platform
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="step-btn" onclick="prevStep()">← Previous</button>
+                        <button type="button" class="step-btn primary" onclick="nextStep()">Next: Final Review →</button>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Agreements & Submission -->
+                <div class="form-step" id="step5">
+                    <div class="section">
+                        <h2 class="section-title">Final Review & Agreements</h2>
+                        
+                        <div class="note-box">
+                            <strong>Almost done!</strong> Please review your information and accept the agreements below.
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="referralCode">Referral Code (Optional)</label>
+                            <input type="text" id="referralCode" name="referralCode" placeholder="If you were referred by another restaurant">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="howHear">How did you hear about Caterix?</label>
+                            <select id="howHear" name="howHear">
+                                <option value="">Select</option>
+                                <option value="search">Online Search</option>
+                                <option value="social">Social Media</option>
+                                <option value="friend">Friend/Colleague</option>
+                                <option value="marketing">Marketing/Advertisement</option>
+                                <option value="sales">Sales Representative</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="terms" required>
+                                I agree to the <a href="#" style="color: #10b981; font-weight: 600;">Caterix Restaurant Agreement</a> and <a href="#" style="color: #10b981; font-weight: 600;">Terms of Service</a>
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="privacy" required>
+                                I acknowledge that I have read and understand the <a href="#" style="color: #10b981; font-weight: 600;">Privacy Notice</a>
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="accurateInfo" required>
+                                I certify that all information provided is accurate and complete
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="marketing">
+                                I'd like to receive marketing communications and updates from Caterix
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="step-btn" onclick="prevStep()">← Previous</button>
+                        <button type="submit" class="step-btn primary">Submit Application</button>
+                    </div>
+                </div>
+                
+                <div class="footer-note">
+                    <p><strong>What happens next?</strong> After submitting your application, a Caterix team will contact you within 24-48 hours to discuss next steps, including menu setup, tablet installation, and your onboarding session.</p>
+                    <p>For questions during the process, contact our Caterix support team at <strong>info@caterix.com</strong> or call <strong>1-800-CATERIX</strong>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Multi-step form functionality
+        let currentStep = 1;
+        const totalSteps = 5;
+        
+        function updateProgressBar() {
+            const progressFill = document.getElementById('progressFill');
+            const progressPercentage = (currentStep / totalSteps) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+        }
+        
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(element => {
+                element.classList.remove('active');
+            });
+            
+            // Show current step
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            // Update progress bar
+            updateProgressBar();
+        }
+        
+        function nextStep() {
+            // Validate current step before proceeding
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+        }
+        
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+        
+        function validateStep(step) {
+            let isValid = true;
+            
+            // Get all required inputs in current step
+            const currentStepElement = document.getElementById(`step${step}`);
+            const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            // Reset previous error styles
+            requiredInputs.forEach(input => {
+                input.style.borderColor = '#e2e8f0';
+            });
+            
+            // Validate each required input
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ef4444';
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                
+                // Special validation for email
+                if (input.type === 'email' && input.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(input.value)) {
+                        isValid = false;
+                        input.style.borderColor = '#ef4444';
+                        alert('Please enter a valid email address');
+                    }
+                }
+            });
+            
+            // Validate required checkboxes in current step
+            const requiredCheckboxes = currentStepElement.querySelectorAll('input[type="checkbox"][required]');
+            requiredCheckboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    isValid = false;
+                    checkbox.parentElement.style.color = '#ef4444';
+                    checkbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    checkbox.parentElement.style.color = '';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please complete all required fields before proceeding.');
+            }
+            
+            return isValid;
+        }
+        
+        // Handle file upload clicks
+        document.getElementById('licenseUpload').addEventListener('click', function() {
+            document.getElementById('licenseFile').click();
+        });
+        
+        document.getElementById('permitUpload').addEventListener('click', function() {
+            document.getElementById('permitFile').click();
+        });
+        
+        document.getElementById('insuranceUpload').addEventListener('click', function() {
+            document.getElementById('insuranceFile').click();
+        });
+        
+        document.getElementById('menuUpload').addEventListener('click', function() {
+            document.getElementById('menuFile').click();
+        });
+        
+        document.getElementById('photosUpload').addEventListener('click', function() {
+            document.getElementById('photosFile').click();
+        });
+        
+        // Handle file selection display
+        const fileInputs = ['licenseFile', 'permitFile', 'insuranceFile', 'menuFile', 'photosFile'];
+        fileInputs.forEach(inputId => {
+            const inputElement = document.getElementById(inputId);
+            if (inputElement) {
+                inputElement.addEventListener('change', function(e) {
+                    const uploadDiv = document.getElementById(inputId.replace('File', 'Upload'));
+                    if (inputId === 'photosFile' && e.target.files.length > 0) {
+                        uploadDiv.querySelector('.upload-text').textContent = `${e.target.files.length} photo(s) selected`;
+                    } else if (e.target.files[0]) {
+                        uploadDiv.querySelector('.upload-text').textContent = `Selected: ${e.target.files[0].name}`;
+                    }
+                    uploadDiv.style.borderColor = '#10b981';
+                    uploadDiv.style.backgroundColor = '#f0fdf4';
+                });
+            }
+        });
+        
+        // Handle drag and drop for file uploads
+        const uploadDivs = document.querySelectorAll('.file-upload');
+        uploadDivs.forEach(div => {
+            div.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            
+            div.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+            });
+            
+            div.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                // Get the associated file input
+                const fileInputId = this.id.replace('Upload', 'File');
+                const fileInput = document.getElementById(fileInputId);
+                
+                if (fileInput && e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files;
+                    
+                    // Trigger change event
+                    const event = new Event('change');
+                    fileInput.dispatchEvent(event);
+                }
+            });
+        });
+        
+        // Handle closed day checkboxes
+        const dayCheckboxes = document.querySelectorAll('input[name$="Closed"]');
+        dayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const dayPrefix = this.name.replace('Closed', '');
+                const openInput = document.querySelector(`input[name="${dayPrefix}Open"]`);
+                const closeInput = document.querySelector(`input[name="${dayPrefix}Close"]`);
+                
+                if (this.checked) {
+                    openInput.disabled = true;
+                    closeInput.disabled = true;
+                    openInput.style.opacity = '0.5';
+                    closeInput.style.opacity = '0.5';
+                } else {
+                    openInput.disabled = false;
+                    closeInput.disabled = false;
+                    openInput.style.opacity = '1';
+                    closeInput.style.opacity = '1';
+                }
+            });
+        });
+        
+        // Handle form submission
+        document.getElementById('caterixForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateStep(currentStep)) {
+                // In a real application, you would send data to server here
+                const formData = new FormData(this);
+                
+                // Show success message
+                alert('Application submitted successfully! A Caterix representative will contact you within 24 hours.');
+                
+                // Reset form (optional)
+                // this.reset();
+                // currentStep = 1;
+                // showStep(currentStep);
+            }
+        });
+        
+        // Pre-fill with sample data for demo purposes
+        window.addEventListener('load', function() {
+            // This is just for demo - in a real form these would be empty
+            document.getElementById('restaurantName').value = "Bella Vista Italian Restaurant";
+            document.getElementById('cuisineType').value = "italian";
+            document.getElementById('address').value = "123 Main Street, San Francisco, CA 94110";
+            document.getElementById('phone').value = "(415) 555-1234";
+            document.getElementById('email').value = "manager@bellavista.com";
+            document.getElementById('ownerName').value = "Maria Rodriguez";
+            document.getElementById('ownerTitle').value = "owner";
+            document.getElementById('businessLicense').value = "BL-2023-78451";
+            document.getElementById('taxId').value = "12-3456789";
+            document.getElementById('yearsInOperation').value = "5-10";
+            document.getElementById('menuDescription').value = "Authentic Italian cuisine featuring handmade pasta, wood-fired pizzas, fresh seafood, and an extensive wine list. Our specialties include lasagna Bolognese, margherita pizza, and tiramisu.";
+            document.getElementById('priceRange').value = "$$";
+            document.getElementById('accountHolder').value = "Bella Vista Restaurant Inc.";
+            document.getElementById('bankName').value = "First National Bank";
+            document.getElementById('accountNumber').value = "XXXXXX7890";
+            document.getElementById('routingNumber').value = "123000789";
+            document.getElementById('howHear').value = "friend";
+            
+            // Initialize progress bar
+            updateProgressBar();
+        });
+    </script>
+</body>
+</html>
+
