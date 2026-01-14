@@ -1232,9 +1232,9 @@
                 </a>
                 
                 <div class="auth-buttons">
-                    <!-- Sign In and Sign Up will still open in modal -->
-                    <a href="#" class="signin-btn" data-action="signin">Sign In</a>
-                    <a href="#" class="signup-btn" data-action="signup">Sign Up</a>
+                    <!-- CHANGED: Direct links instead of JavaScript handlers -->
+                    <a href="signin.html" class="signin-btn">Sign In</a>
+                    <a href="signup.html" class="signup-btn">Sign Up</a>
                 </div>
                 
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1475,8 +1475,9 @@
                 </a>
                 
                 <div class="auth-buttons">
-                    <a href="#" class="signin-btn" data-action="signin">Sign In</a>
-                    <a href="#" class="signup-btn" data-action="signup">Sign Up</a>
+                    <!-- CHANGED: Direct links instead of JavaScript handlers -->
+                    <a href="signin.html" class="signin-btn">Sign In</a>
+                    <a href="signup.html" class="signup-btn">Sign Up</a>
                 </div>
                 
                 <button class="mobile-menu-btn" id="mobileMenuBtn2">
@@ -1557,8 +1558,9 @@
                 </a>
                 
                 <div class="auth-buttons">
-                    <a href="#" class="signin-btn" data-action="signin">Sign In</a>
-                    <a href="#" class="signup-btn" data-action="signup">Sign Up</a>
+                    <!-- CHANGED: Direct links instead of JavaScript handlers -->
+                    <a href="signin.html" class="signin-btn">Sign In</a>
+                    <a href="signup.html" class="signup-btn">Sign Up</a>
                 </div>
                 
                 <button class="mobile-menu-btn" id="mobileMenuBtn3">
@@ -1791,27 +1793,6 @@
             noCalendar: true,
             dateFormat: "h:i K",
             placeholder: "Select time"
-        });
-        
-        // ============================================
-        // SIMPLIFIED: Only for Sign In/Sign Up buttons
-        // ============================================
-        
-        // Simple alert for Sign In/Sign Up (temporary)
-        document.querySelectorAll('.signin-btn[data-action="signin"]').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                // This will open in modal, but for now show alert
-                window.open('signin.html', '_blank');
-            });
-        });
-        
-        document.querySelectorAll('.signup-btn[data-action="signup"]').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                // This will open in modal, but for now show alert
-                window.open('signup.html', '_blank');
-            });
         });
         
         // ============================================
